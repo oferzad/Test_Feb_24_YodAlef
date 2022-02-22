@@ -8,6 +8,11 @@ namespace Test_Feb_24_YodAlef
     public class Q1
     {
         #region Question1 Ezer
+              /// <summary>
+        /// n- מספר איברים במחסנית
+        /// Copy- O(n)
+        ///פעולה המחזירה עותק של מחסנית קיימת
+        /// </summary>
         public static Stack<T> CopyStack<T>(Stack<T> stack)
         {
             Stack<T> copy = new Stack<T>();
@@ -23,7 +28,10 @@ namespace Test_Feb_24_YodAlef
             }
             return copy;
         }
-
+ /// <summary>
+        /// n- מספר איברים במחסנית
+        /// GetLastInStack- O(n)
+        ///פעולה המחזירה את האיבר האחרון במחסנית
         public static T GetLastInStack<T>(Stack<T> st)
         {
             Stack<T> backUp = CopyStack(st);
@@ -38,6 +46,11 @@ namespace Test_Feb_24_YodAlef
         }
         #endregion
         #region Question 1 A
+            /// <summary>
+        /// n- מספר איברים במחסנית
+        /// IsLimitied- Copy O(n)+ last O(n) + while - O(n)
+        /// Total = O(n)
+        /// </summary>
         public static bool IsLimitedStack(Stack<int> st)
         {
 
@@ -57,6 +70,14 @@ namespace Test_Feb_24_YodAlef
             return true;
 
         }
+        /// <summary>
+        /// n- מספר איברים בתור
+        /// m- מספר איברים במחסנית
+        /// נבחר n,m = Max(n,m)
+        /// ולכן עבור כל איבר בתור נפעיל את פעולת isLimited
+        /// נקבל
+        /// O(n^2)
+        /// </summary>
         public static Queue<Item> Question1b(Queue<Stack<int>> q)
         {
             Queue<Item> retQ = new Queue<Item>();
@@ -75,7 +96,7 @@ namespace Test_Feb_24_YodAlef
         }
         #endregion
     }
-
+///מחלקת ITEM
     public class Item
     {
         private int v1;
