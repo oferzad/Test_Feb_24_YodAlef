@@ -55,10 +55,34 @@ namespace Test_Feb_24_YodAlef
                 q.Insert(temp.Remove());
         }
 
+
+        //This helper method calculate the number of friends of person in the begining of q!
+        //Complexity O(n), where n is the size of the q.
+        static int HamulaSize(Queue<IsraeliPerson> q, IsraeliPerson person)
+        {
+            int counter = 0;
+            Queue<IsraeliPerson> temp = new Queue<IsraeliPerson>();
+            //count all friends of person
+            while (!q.IsEmpty() && person.IsFriendOf(q.Head()))
+            {
+                counter++;
+                temp.Insert(q.Remove());
+            }
+            //continue rolling the queue to the end
+            while (!q.IsEmpty())
+                temp.Insert(q.Remove());
+            //move back all Israeli persons back to q
+            while (!temp.IsEmpty())
+                q.Insert(temp.Remove());
+
+            return counter;
+        }
+
         //Scan the queue and find the largest Hamula
         //Complexity - Given that k is the number of people in the queue and 
-        // m is the total number of friends per person in queue, and n = max(k,m)
-        // the complexity is O(n^2)
+        // m is the total number of friends per person in queue, and p is the number
+        // of firends of a person and n = max(k, m, p)
+        // the complexity is O(n^3)
         static int LargestHamula(Queue<IsraeliPerson> q)
         {
             int max = 0, counter = 0;
@@ -66,16 +90,14 @@ namespace Test_Feb_24_YodAlef
             while (!q.IsEmpty())
             {
                 IsraeliPerson current = q.Remove();
-                temp.Insert(current);
-                while (!q.IsEmpty() && current.IsFriendOf(q.Head()))
-                {
-                    counter++;
-                    temp.Insert(q.Remove());
-                }
+                counter = HamulaSize(q, current) + 1;
                 if (counter > max)
                     max = counter;
-                counter = 0;
+                temp.Insert(current);
             }
+            //move back all Israeli persons back to q
+            while (!temp.IsEmpty())
+                q.Insert(temp.Remove());
             return max;
         }
     }
